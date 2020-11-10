@@ -1,24 +1,26 @@
-CREATE DATABASE IF NOT EXISTS `education`
-USE `education`;
+CREATE DATABASE IF NOT EXISTS `education`;
 
 
 CREATE TABLE IF NOT EXISTS `course` (
-  `courseid` int(11),
+  `courseid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250),
   `institution` int(11),
-  KEY `FK_course_institution` (`institution`)
+  PRIMARY KEY(courseid),
+  FOREIGN KEY(institution) REFERENCES institution(institutionid)
 )
 
 
 CREATE TABLE IF NOT EXISTS `institution` (
-  `institutionid` int(11),
-  `name` varchar(250)
+  `institutionid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250),
+  PRIMARY KEY(institutionid)
 )
 
 
 CREATE TABLE IF NOT EXISTS `student` (
-  `studentid` int(11) DEFAULT NULL,
-  `name` varchar(250) DEFAULT NULL,
-  `course` int(11) DEFAULT NULL,
-  KEY `FK_student_course` (`course`)
+  `studentid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250),
+  `course` int(11),
+  PRIMARY KEY(studentid),
+  FOREIGN KEY(course) REFERENCES course(courseid)
 )
